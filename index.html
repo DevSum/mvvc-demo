@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MVVC demo</title>
+</head>
+<body>
+<div id="app">
+  Hi, {{ howMuch }}!<br/>
+  <button inq-on:onclick="change">
+    Click {{ howMuch }}
+  </button><br/>
+  <input inq-model="howMuch">
+</div>
+
+</body>
+<script type="text/javascript" src="my-mvvm.js"></script>
+<script>
+    var app = new MyMVVM({
+        el: '#app',
+        data: {
+          howMuch: 'One',
+        },
+        methods: {
+            change() {
+                this.howMuch = 'Two'
+            }
+        }
+    })
+</script>
+</html>
