@@ -47,8 +47,10 @@ class MyMVVM {
                     root[attr.name.slice(7)] = this.methods[attr.value].bind(this)
                 }
                 if (attr.name.startsWith('inq-model')) {
+                    const onInput = root.oninput
                     root.oninput = (newValue) => {
                         this[attr.value] = newValue.target.value
+                        onInput()
                     }
                     this.bindTextContent(attr.value, root, 'value')
                 }

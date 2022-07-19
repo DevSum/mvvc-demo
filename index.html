@@ -10,7 +10,7 @@
   <button inq-on:onclick="change">
     Click {{ howMuch }}
   </button><br/>
-  <input inq-model="howMuch">
+  <input inq-model="howMuch" inq-on:oninput="log" >
 </div>
 
 </body>
@@ -24,7 +24,8 @@
         methods: {
             change() {
                 this.howMuch = 'Two'
-            }
+            },
+            log: e => console.log(e.target.value)
         }
     })
 </script>
