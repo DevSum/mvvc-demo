@@ -47,7 +47,7 @@ class MyMVVM {
                     const attrBak = root[attr.name.slice(7)]
                     root[attr.name.slice(7)] = ((...a) => {
                         this.methods[attr.value](...a)
-                        attrBak(...a)
+                        attrBak?.(...a)
                     }).bind(this)
                 }
                 if (attr.name.startsWith('inq-model')) {
