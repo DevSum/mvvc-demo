@@ -44,13 +44,17 @@ class MyMVVM {
             const attr = root.attributes[i]
             if (attr.name.startsWith('inq-')) {
                 if (attr.name.startsWith('inq-on')) {
-                    root[attr.name.slice(7)] = this.methods[attr.value].bind(this)
+                    const attrBak = root[attr.name.slice(7)]
+                    root[attr.name.slice(7)] = ((...a) => {
+                        this.methods[attr.value](...a)
+                        attrBak(...a)
+                    }).bind(this)
                 }
                 if (attr.name.startsWith('inq-model')) {
                     const onInput = root.oninput
-                    root.oninput = (newValue) => {
-                        this[attr.value] = newValue.target.value
-                        onInput()
+                    root.oninput = (e) => {
+                        this[attr.value] = e.target.value
+                        onInput?.(e)
                     }
                     this.bindTextContent(attr.value, root, 'value')
                 }
